@@ -4,7 +4,6 @@
 #define STACKS (256)
 #define STRLEN (1024)
 int main(int argc, char **argv){
-  if(argc!=2) return 0;
   char instr[STRLEN];
   char outstr[STRLEN];
   char **stack=(char**)malloc(STACKS*sizeof(char*));
@@ -13,8 +12,7 @@ int main(int argc, char **argv){
     strcpy(stack[s],"");
   }
 
-  FILE *infile=fopen(argv[1], "rt");
-  while(fgets(instr,STRLEN-1,infile)!=NULL){
+  while(fgets(instr,STRLEN-1,stdin)!=NULL){
     int s=0;
     for(int i=0;i<strlen(instr);i++){
       char c=instr[i];
@@ -37,7 +35,6 @@ int main(int argc, char **argv){
     }//for char
     printf("%s\n",stack[0]);
   }//while line
-  fclose(infile);
   for(int s=0;s<STACKS;s++)free(stack[s]);
   free(stack);
   return -1;
